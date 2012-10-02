@@ -1,0 +1,6 @@
+# to use log4j
+org.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger
+
+# to send all message to console (System.out)un-comment the following line.
+# this will use simplelog.properties
+#org.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog

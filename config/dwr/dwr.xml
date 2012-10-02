@@ -1,0 +1,220 @@
+<!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 3.0//EN" "http://getahead.org/dwr//dwr30.dtd">
+<dwr>
+	<allow>	
+   
+	<!-- filter class="org.directwebremoting.filter.AuditLogAjaxFilter"/ 
+       -->
+    <convert match="java.lang.Exception" converter="exception">
+  			<param name='include' value='message,lineNumber'/>
+	</convert>
+    <convert match="java.lang.StackTraceElement" converter="bean"/>
+    	
+	<convert converter="bean" match="com.imababa.empower.common.view.ajax.FieldValidationResult" />
+	<convert converter="bean" match="com.imababa.empower.common.view.ajax.DWRSubmitResult" />
+	<convert converter="bean" match="com.imababa.empower.common.view.ajax.AjaxFormLoadData" />
+	<convert converter="bean" match="com.imababa.empower.common.view.ajax.AjaxGridData" />
+	<convert converter="bean" match="com.imababa.empower.common.view.ajax.AjaxSelectFieldData" />
+	<convert converter="bean" match="com.imababa.empower.common.valueobject.ValueTextPair" />
+	<convert converter="bean" match="com.imababa.empower.vehrent.model.config.VehUIPref" />
+	<convert converter="bean" match="com.imababa.empower.vehrent.view.common.UserContext" />
+	<convert converter="bean" match="com.imababa.empower.vehrent.view.common.SourceContext" />
+	<convert converter="bean" match="com.imababa.empower.vehrent.view.common.SessionContext" />
+		<convert converter="bean" match="com.imababa.empower.vehrent.valueobject.rental.TripInfoVO" />  
+	<convert converter="bean" match="com.imababa.empower.vehrent.model.common.AppUser" />
+	
+	<convert converter="bean" match="com.imababa.empower.vehrent.valueobject.vehicle.VehicleTreeNode" />
+	<convert converter="bean" match="com.imababa.empower.vehrent.valueobject.vehicle.VehicleLockStatus" />		
+	<convert converter="bean" match="com.imababa.empower.vehrent.valueobject.vehicle.VehicleDrpDwn" />
+	<convert converter="bean" match="com.imababa.empower.vehrent.valueobject.vehicle.TrafficTicketVO" />
+		<convert converter="bean" match="com.imababa.empower.vehrent.valueobject.vehicle.AccidentInfoVO" />
+	<convert converter="bean" match="com.imababa.empower.vehrent.valueobject.rental.VehicleInfo" />
+	<convert converter="bean" match="com.imababa.empower.vehrent.valueobject.hr.ChauffeurVO" />
+	
+	<convert converter="bean" match="com.imababa.empower.vehrent.model.vehicle.Vehicle" />
+	<convert converter="bean" match="com.imababa.empower.vehrent.model.vehicle.VehicleSpec" />
+	<convert converter="bean" match="com.imababa.empower.vehrent.model.vehicle.VehicleServicing" />
+	<convert converter="bean" match="com.imababa.empower.vehrent.model.vehicle.VehicleSummaryDetails" />
+	<convert converter="bean" match="com.imababa.empower.vehrent.model.vehicle.VehicleInsurance" />
+	<convert converter="bean" match="com.imababa.empower.vehrent.model.vehicle.Accident" />
+	<convert converter="bean" match="com.imababa.empower.vehrent.model.vehicle.TrafficTicket" />
+	<convert converter="bean" match="com.imababa.empower.vehrent.valueobject.vehicle.UpdateDamage" />
+	<convert converter="bean" match="com.imababa.empower.vehrent.model.vehicle.VehServiceCenter" ></convert>
+	<convert converter="bean" match="com.imababa.empower.vehrent.model.vehicle.VehicleExpense" />
+	
+	<convert converter="" match="com.imababa.empower.vehrent.dwr.handler.newBooking.BookingResultVO"/>
+	<convert converter="bean" match="com.imababa.empower.vehrent.dwr.handler.newBooking.BookingVO" ></convert>
+	<convert converter="bean" match="com.imababa.empower.vehrent.valueobject.rental.VehicleAvailabilityCheck" ></convert>
+	<convert converter="bean" match="com.imababa.empower.vehrent.model.rental.BookingInfoVO" ></convert>
+		
+	<!-- vikas Codes Start Here -->             
+	<convert converter="bean" match="com.imababa.empower.common.service.ServiceInvocationResult" />      
+    <convert converter="bean" match="com.imababa.empower.vehrent.action.crm.CustomerMgtAction" />    
+	<convert converter="bean" match="com.imababa.empower.common.model.EmailTemplate" />   
+	<convert converter="bean" match="com.imababa.empower.common.model.Address" />                               
+	<convert converter="bean" match="com.imababa.empower.vehrent.model.common.AppAddress" />     
+	<convert converter="bean" match="com.imababa.empower.vehrent.model.crm.CorporateCustomer" />                        
+	<convert converter="bean" match="com.imababa.empower.vehrent.model.crm.RetailCustomer" />                        
+	<convert converter="bean" match="com.imababa.empower.vehrent.valueobject.crm.RetailCustomerVO" /> 	 
+    <convert converter="bean" match="com.imababa.empower.vehrent.valueobject.common.MailingBillingAddressVO" /> 	
+	<convert converter="bean" match="com.imababa.empower.vehrent.valueobject.crm.CorporateCustomerVO" />    
+	<!-- vikas Codes End Here -->	  
+		
+	
+	
+		
+	<!-- Kiran Codes Start Here -->
+	<convert converter="bean" match="com.imababa.empower.vehrent.valueobject.rental.VehicleAvailabiltyResultVO" />
+	<convert converter="bean" match="com.imababa.empower.vehrent.valueobject.rental.RentalRequestVO" ></convert>
+	<convert converter="bean" match="com.imababa.empower.vehrent.valueobject.rental.AllocableVehicleVO" ></convert>
+	<convert converter="bean" match="com.imababa.empower.common.model.Consumer" ></convert>
+	<convert converter="bean" match="com.imababa.empower.vehrent.model.crm.RetailCustomer" ></convert>
+	<convert converter="bean" match="com.imababa.empower.vehrent.valueobject.crm.RetailCustomerVO" ></convert>
+	<convert converter="bean" match="com.imababa.empower.vehrent.valueobject.crm.PassengerVO" ></convert>
+	<convert converter="bean" match="com.imababa.empower.vehrent.model.crm.Passenger" ></convert>
+	<convert converter="bean" match="com.imababa.empower.vehrent.valueobject.rental.SelfDriverInfoVo" ></convert>
+	<convert converter="bean" match="com.imababa.empower.vehrent.model.rental.ChauffeurRate" ></convert>
+	
+	<!-- Kiran Codes End here -->	
+		
+		
+	<!-- Narendra Codes Start Here -->
+	<convert converter="bean" match="com.imababa.empower.vehrent.valueobject.rental.AgentInfoVo" />
+	<convert converter="bean" match="com.imababa.empower.vehrent.model.partner.ModifyAgentInformation" />
+	<convert converter="bean" match="com.imababa.empower.vehrent.model.vehicle.MaintainModify" />
+	<convert converter="bean" match="com.imababa.empower.vehrent.model.vehicle.PostponementDate" />
+	
+	<!-- Narendra Codes End here -->	
+		
+		
+	<!-- Kislay Singh -->
+	<convert converter="bean"  match="com.imababa.empower.vehrent.valueobject.rental.CheckInInfoVO"/>
+	<convert converter="bean"  match="com.imababa.empower.vehrent.valueobject.rental.CheckOutInfoVO"/>
+	<!--  Kislay Singh codes end -->
+	
+	<!--  Vel codes starts here -->
+	<convert converter="bean" match="com.imababa.empower.vehrent.model.partner.EpwUser" />	
+	<convert converter="bean" match="com.imababa.empower.vehrent.model.partner.Agent" />
+	<convert converter="bean" match="com.imababa.empower.vehrent.model.common.AppSource" />
+	
+	<create creator="new" javascript="AgentDetailsProvider">
+	<param name="class" value="com.imababa.empower.vehrent.dwr.handler.partner.AgentDetailsProvider" />			
+	</create>
+	
+	<create creator="new" javascript="PartnerDetailsProvider">
+	<param name="class" value="com.imababa.empower.vehrent.dwr.handler.partner.PartnerDetailsProvider" />
+	</create>
+	
+	
+	<create creator="new" javascript="UIPreferencesManager">
+		<param name="class" value="com.imababa.empower.vehrent.dwr.handler.config.UIPreferencesManager" />			
+	</create>
+	
+	<create creator="new" javascript="VehicleFormsDataProvider">
+		<param name="class" value="com.imababa.empower.vehrent.dwr.handler.vehicle.VehicleFormsDataProvider" />			
+	</create>
+	
+	<create creator="new" javascript="VehicleDataManager">
+		<param name="class" value="com.imababa.empower.vehrent.dwr.handler.vehicle.VehicleDataManager" />			
+	</create>
+	
+	<create creator="new" javascript="VehicleTreeDataProvider">
+		<param name="class" value="com.imababa.empower.vehrent.dwr.handler.vehicle.VehicleTreeDataProvider" />			
+	</create>
+	
+	<create creator="new" javascript="VehicleMaintenanceManager">
+		<param name="class" value="com.imababa.empower.vehrent.dwr.handler.vehicle.VehicleMaintenanceManager" />			
+	</create>
+	
+	
+		<create creator="new" javascript="InvoiceNumberManager">
+		<param name="class" value="com.imababa.empower.vehrent.dwr.handler.config.InvoiceNumberManager" />			
+	</create>
+	
+
+<!-- vikas Codes Start Here -->          
+	<create creator="new" javascript="EmailTemplateManager">
+		<param name="class" value="com.imababa.empower.vehrent.dwr.handler.crm.EmailTemplateManager" />			
+	</create>
+	 <create creator="new" javascript="CustomerManager">   
+		<param name="class" value="com.imababa.empower.vehrent.dwr.handler.crm.CustomerManager" />			
+	</create>           
+	<create creator="new" javascript="CustomerMgtAction">    
+		<param name="class" value="com.imababa.empower.vehrent.action.crm.CustomerMgtAction" />			
+	</create>               
+	  <!-- vikas Codes End Here -->
+	
+	
+	<create creator="new" javascript="VehicleDrpDwnMgmt">
+		<param name="class" value="com.imababa.empower.vehrent.dwr.handler.vehicle.VehicleDrpDwnMgmt" />			
+	</create>
+	
+	<create creator="new" javascript="BookingAction">
+		<param name="class" value="com.imababa.empower.vehrent.action.rental.BookingAction" />			
+	</create>
+	<create creator="new" javascript="BookingService" >
+		<param name="class" value="com.imababa.empower.vehrent.service.rental.BookingService" />			
+	</create>
+	<create creator="new" javascript="VehicleAvailablityProvider" >
+		<param name="class" value="com.imababa.empower.vehrent.dwr.handler.vehicle.VehicleAvailablityProvider" />			
+	</create>
+	<create creator="new" javascript="CommonDataProvider" >
+		<param name="class" value="com.imababa.empower.vehrent.dwr.handler.common.CommonDataProvider" />			
+	</create>
+	
+	
+	<!--  
+	<create creator="new" javascript="BookingService" >
+		<param name="class" value="com.imababa.empower.vehrent.service.rental.BookingService" />			
+	</create>
+	-->
+	
+	<!-- Narendra Codes Start Here -->
+	<create creator="new" javascript="VehicleMaintenanceManager">
+		<param name="class" value="com.imababa.empower.vehrent.dwr.handler.vehicle.VehicleMaintenanceManager" />			
+	</create>
+	<create creator="new" javascript="AgentDetailsProvider">
+		<param name="class" value="com.imababa.empower.vehrent.dwr.handler.partner.AgentDetailsProvider" />			
+	</create>
+	<!-- Narendra Codes end Here -->
+	
+	<!-- Kislay Singh -->
+	
+	<create creator="new" javascript="PlannerCalculation">
+		<param name="class" value="com.imababa.empower.vehrent.service.rental.PlannerCalculation" />			
+	</create>
+	
+	<create creator="new" javascript="CheckOutManager">
+		<param name="class" value="com.imababa.empower.vehrent.service.rental.CheckOutManager" />			
+	</create>
+	
+	<create creator="new" javascript="CheckInManager">
+		<param name="class" value="com.imababa.empower.vehrent.service.rental.CheckInManager" />			
+	</create>			
+	
+	<!--  Kislay Singh Code end -->		
+	
+	<!-- Ravi Codes Start Here -->
+	<create creator="new" javascript="VehicleDamageManager">
+		<param name="class" value="com.imababa.empower.vehrent.dwr.handler.vehicle.VehicleDamageManager" />			
+	</create>
+	
+	<create creator="new" javascript="FleetMgtAction">
+		<param name="class" value="com.imababa.empower.vehrent.action.vehicle.FleetMgtAction" />			
+	</create>
+	
+	<!-- Ravi Codes end Here -->
+	
+	<!--  Aravind Code Starts-->
+	<create creator="new" javascript="UserManager" >
+		<param name="class" value="com.imababa.empower.vehrent.dwr.handler.config.UserManager" />			
+	</create>
+<!--  Aravind Code ENDS-->
+	
+		<create creator="new" javascript="TripVehicleProvider" >
+		<param name="class" value="com.imababa.empower.vehrent.dwr.handler.trip.TripVehicleProvider" />			
+	</create>
+	<create creator="new" javascript="TripMgmtAction">
+		<param name="class" value="com.imababa.empower.vehrent.action.trip.TripMgmtAction" />			
+	</create>		
+	</allow>
+</dwr>

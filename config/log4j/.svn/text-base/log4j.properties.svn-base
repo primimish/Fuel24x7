@@ -1,0 +1,85 @@
+###############################################################################
+# CONSOLE messages for rootLogger
+###############################################################################
+log4j.appender.console=org.apache.log4j.ConsoleAppender
+log4j.appender.console.Target=System.err
+log4j.appender.console.layout=org.apache.log4j.PatternLayout
+log4j.appender.console.layout.ConversionPattern=%d{ABSOLUTE} %5p %c{1}:%4L - %m%n
+
+log4j.appender.appLog=org.apache.log4j.RollingFileAppender
+log4j.appender.appLog.File=log/rlog.log
+log4j.appender.appLog.MaxFileSize=5000KB
+log4j.appender.appLog.MaxBackupIndex=4
+log4j.appender.appLog.layout=org.apache.log4j.PatternLayout
+log4j.appender.appLog.layout.ConversionPattern=%d{dd MMM HH:mm:ss,SSS} %-5p %-c:%L - %m%n
+
+#log4j.rootLogger=debug, console
+log4j.rootLogger=debug, appLog
+
+###############################################################################
+# EJB logger.
+###############################################################################
+log4j.appender.appEJBLog=org.apache.log4j.RollingFileAppender
+log4j.appender.appEJBLog.File=log/EJB.log
+log4j.appender.appEJBLog.MaxFileSize=500KB
+log4j.appender.appEJBLog.MaxBackupIndex=4
+log4j.appender.appEJBLog.layout=org.apache.log4j.PatternLayout
+log4j.appender.appEJBLog.layout.ConversionPattern=%d{dd MMM HH:mm:ss,SSS} %-5p %-c{1}:%L - %m%n
+
+## uncomment the following packages, 
+## if you want them to log to a separate file
+#log4j.logger.com.genco.rps.ejb=debug, appEJBLog
+#log4j.logger.com.genco.rps.pojo=debug, appEJBLog
+#log4j.logger.com.genco.rps.persistence=debug, appEJBLog
+#log4j.logger.com.genco.rps.logic=debug, appEJBLog
+
+###############################################################################
+# UI logger.
+###############################################################################
+log4j.appender.appUILog=org.apache.log4j.RollingFileAppender
+log4j.appender.appUILog.File=log/UI.log
+log4j.appender.appUILog.MaxFileSize=5000KB
+log4j.appender.appUILog.MaxBackupIndex=4
+log4j.appender.appUILog.layout=org.apache.log4j.PatternLayout
+log4j.appender.appUILog.layout.ConversionPattern=%d{dd MMM HH:mm:ss,SSS} %-5p %t %c{1}:%-4L - %m%n
+
+## uncomment the following packages, 
+## if you want them to log to a separate file
+#log4j.logger.com.genco.rps.action=debug, appUILog
+#log4j.logger.com.genco.rps.form=debug, appUILog
+#log4j.logger.com.genco.rps.helper=debug, appUILog
+#log4j.logger.com.genco.rps.service=debug, appUILog
+#log4j.logger.com.genco.rps.test=debug, appUILog
+
+## STRUTS related logging
+log4j.appender.appUIstrutsLog=org.apache.log4j.RollingFileAppender
+log4j.appender.appUIstrutsLog.File=log/rlogUIstruts.log
+log4j.appender.appUIstrutsLog.MaxFileSize=5000KB
+log4j.appender.appUIstrutsLog.MaxBackupIndex=4
+log4j.appender.appUIstrutsLog.layout=org.apache.log4j.PatternLayout
+log4j.appender.appUIstrutsLog.layout.ConversionPattern=%d{dd MMM HH:mm:ss,SSS} %-5p %t %c{1}:%-4L - %m%n
+## uncomment the following packages, 
+## if you want them to log to a separate file
+log4j.logger.org.apache.struts=error, appUIstrutsLog
+log4j.logger.org.apache.commons=error, appUIstrutsLog
+
+###################################################################
+# ADDITIVITY - default true
+###################################################################
+# if you want/don't want to write to rootLogger .. 
+# true - to write to rootLogger
+# false - not to write to rootLogger.
+
+log4j.additivity.org.apache.struts=false
+log4j.additivity.org.apache.commons=false
+
+#log4j.additivity.com.genco.rps.ejb=false
+#log4j.additivity.com.genco.rps.pojo=false
+#log4j.additivity.com.genco.rps.persistence=false
+#log4j.additivity.com.genco.rps.logic=false
+#log4j.additivity.com.genco.rps.action=false
+#log4j.additivity.com.genco.rps.form=false
+#log4j.additivity.com.genco.rps.helper=false
+#log4j.additivity.com.genco.rps.service=false
+#log4j.additivity.com.genco.rps.test=false
+

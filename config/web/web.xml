@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+	<!-- FOR DB RESOURCE CONFIGURATION: 'res-ref-name' matches with contex.xml and  dataSource lookUp-->
+
+	<resource-ref>
+		<description>DB Connection</description>
+		<res-ref-name>jdbc/biz_fuelDB</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+	<!-- END OF DB RESOURCE CONFIGURATION   -->
+
+	<servlet>
+		<servlet-name>entext</servlet-name>
+		<servlet-class>
+			com.fuel.lab.view.servlet.FuelRegistration
+		</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>entext</servlet-name>
+		<url-pattern>/i-wish-2-meh.fuel/*</url-pattern>
+	</servlet-mapping>
+	<context-param>
+		<description>Location to store uploaded file</description>
+		<param-name>file-upload</param-name>
+		<param-value>c:\flab-resumes\</param-value>
+	</context-param>
+	<context-param>
+		<param-name>ERROR_PAGE</param-name>
+		<param-value>/WEB-INF/jsp/error.jsp</param-value>
+		<!-- <description>Common login url</description> -->
+	</context-param>
+</web-app>

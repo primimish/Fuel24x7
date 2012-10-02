@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<project name="make-earth-heavenly" default="VERIFY_JAVA_HOME" basedir=".">
+	<description> Build Script </description>
+	<property environment="env"/>
+
+	<!-- =================================
+			          PROPERTIES
+		 ================================ -->
+	<property name="name" value="make-earth-heavenly" />
+	<property name="build.dir" location="build"/>
+	<property name="cfg.dir" location="config"/>
+	<property name="lib.dir" location="C:/apache-tomcat-6.0.18/lib"/>
+	<property name="src.dir" location="java"/>
+	<property name="common.dir" location="${build.dir}/common"/>
+	<property name="cust.name" value="fuler"/>
+	<property name="dist.war.name" value="build/app/make-earth-heavenly"/>
+	<property name="jsp.dir" location="jsps"/>
+	<property name="htdocs" value="webresources"/>
+	<property name="DEPLOY_DIR" value="C:/apache-tomcat-6.0.18/webapps"/>
+	<property  name="DEPLOY_CONFIG" value="C:/apache-tomcat-6.0.18/conf"/>
+	<property name="dist" value="${build.dir}"/>
+	<property name="cfgApp" location="${cfg.dir}/app" />
+	<property name="cfgWeb" location="${cfg.dir}/web"/>
+	<property name="cfgLog" location="${cfg.dir}/log4j"/>
+	<property name="cfgStruts" location="${cfg.dir}/struts"/>
+	<property name="cfgHib" location="${cfg.dir}/hibernate"/>
+	<property name="build.web" location="${build.dir}/web"/>
+	<property name="tomcat.server" location="C:/apache-tomcat-6.0.18"/>
+	<property name="staticDoc" location="C:\Apache2.2\htdocs\vrenContents"></property>
+	<!-- <property name="jsp-deploy-dir"  value="${DEPLOY_DIR}/${cust.name}"/> -->
+	<property name="commonPkgs" value="com/imababa/empower/common/*, com/imababa/empower/valueobject/common"/>
+
+	<path id="classpath">
+		<pathelement location="${build.dir}" />
+		<pathelement location="${cfgLog}" />
+		<pathelement location="${cfgStruts}" />
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar"/>
+			<include name="**/*.zip"/>
+		</fileset>
+		<pathelement location="${common.dir}"/>
+	</path>
+
+	<!-- =================================
+		          TARGETS
+		  ================================ -->
+	<target name="clean" description="Remove all generated files and folders">
+		
+	</target>
+	
+	<target name="init-dev">
+			<property name="log-file" value="log4j.properties" />
+	</target>
+
+	<target name="prepare" description="To create the required build folder structure">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build.dir}/app" />
+		<mkdir dir="${build.dir}/properties" />
+		<mkdir dir="${build.dir}/web/"/>
+		<mkdir dir="${build.dir}/web/META-INF" />
+		<mkdir dir="${build.dir}/web/WEB-INF" />
+		<mkdir dir="${build.dir}/web/WEB-INF/classes" />
+		<mkdir dir="${build.dir}/web/WEB-INF/lib" />
+		<mkdir dir="${common.dir}" />
+	</target>
+		
+	<target name="properties-files" depends="prepare" description="To copy required property files">
+		<echo> i m in properties- files..</echo>
+		<copy todir="${build.dir}/web/WEB-INF">
+			<fileset dir="${cfg.dir}/app">
+				<include name="**/*.properties"/>
+				<include name="**/*.xml"/>
+			</fileset>
+			<fileset dir="${cfg.dir}/struts">
+				<include name="**/*.properties"/>
+				<include name="**/*.xml"/>
+			</fileset>
+
+			<fileset dir="${cfg.dir}/web">
+				<include name="**/*.properties"/>
+				<include name="**/*.xml"/>
+			</fileset>
+			<mapper type="flatten"/>
+		</copy>
+		<copy todir="${build.dir}/web/WEB-INF/classes/">
+			<fileset dir="${cfg.dir}/log4j">
+				<include name="**/*.properties"/>
+			</fileset>			
+		</copy>
+		<copy todir="${build.web}/WEB-INF">
+			<fileset dir="${jsp.dir}">			
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="properties-jar" depends="properties-files" description="To generate properties jar">
+		<jar jarfile="${build.dir}/app/properties.jar" basedir="${build.dir}/properties" />		
+	</target>
+	
+	<!--============== 
+		COMMON classes 
+		==============-->
+
+	<target name="web-classes" depends="prepare,properties-jar" description="To compile Web related Java classes">
+		<echo>Compiling Java files....</echo>
+		<javac debug="on" srcdir="${src.dir}" excludes="${src.dir}/com/**/common/*" destdir="${build.dir}/web/WEB-INF/classes">
+			<classpath refid="classpath" />
+		</javac>		
+	</target>
+	
+	<!--============
+	    Log4j stuff 
+	    ============-->
+	<target name="log4j-prop-files-dev" depends="prepare" description="To copy log4j properties files to ${build.dir}/web/WEB-INF/classes/ .">
+		<copy todir="${build.dir}/web/WEB-INF/classes/">
+			<fileset dir="${cfgLog}">
+				<include name="log4j.properties"/>
+				<include name="commons-logging.properties"/>
+				<include name="simplelog.properties"/>
+			</fileset>
+			<mapper type="flatten"/>
+		</copy>
+	</target>
+
+	<target name="log4j-prop-files-prod" depends="log4j-prop-files-dev" description="To copy log4j properties files.">
+		<echo>copied log4J properties to ${build.dir}/web/WEB-INF/classes/ </echo>
+		<copy file="${cfgLog}/log4j.properties.prod" tofile="${build.dir}/web/WEB-INF/classes/log4j.properties" overwrite="true"/>
+		<copy todir="${build.dir}/web/WEB-INF/classes/">
+			<fileset dir="${cfgLog}">
+				<include name="commons-logging.properties"/>
+				<include name="simplelog.properties"/>
+			</fileset>
+			<mapper type="flatten"/>
+		</copy>
+	</target>
+
+	<!--==========
+	  WEB stuff 
+	  ============-->
+
+	<target name="web-descriptors" depends="prepare" description="To generate WEB descriptors">
+		<copy todir="${build.dir}/web/WEB-INF/">
+			<fileset dir="${cfgWeb}">
+				<include name="**/*.xml"/>
+			</fileset>
+			<mapper type="flatten"/>
+		</copy>
+		<copy todir="${build.dir}/web/WEB-INF/">
+			<fileset dir="${cfg.dir}">
+				<include name="**/*.tld"/>
+			</fileset>
+			<mapper type="flatten"/>
+		</copy>
+
+		<copy todir="${build.dir}/web/WEB-INF/">
+			<fileset dir="${cfgStruts}">
+				<include name="**/*.xml"/>
+			</fileset>
+			<mapper type="flatten"/>
+		</copy>
+		
+		<copy todir="${build.web}/WEB-INF">
+			<fileset dir="${cfgHib}">
+				<include name="**/*.xml"/>
+			</fileset>
+			<mapper type="flatten"/>
+		</copy>
+		<copy todir="${build.dir}/web/WEB-INF/classes/">
+			<fileset dir="${cfgApp}">
+				<include name="**/*.properties"/>
+			</fileset>
+			<mapper type="flatten"/>
+		</copy>
+	</target>
+
+	<target name="web-files" depends="web-descriptors" description="To copy Web related files like HTML,JS,images,etc..">
+		<copy todir="${staticDoc}/">
+			<fileset dir="${htdocs}/">
+				<include name="**/*.*"/>
+			</fileset>
+		</copy>		
+	</target>
+
+	
+	<target name="hibernate.hbm" depends="web-files" description="To put all hbm.xml files to corresponding Package">
+		<copy todir="${build.web}/WEB-INF/classes">
+				<fileset dir="${src.dir}">
+					<include name="*.xml"/>
+				</fileset>		
+		</copy>
+		
+	</target>
+	
+	<target name="web-war" depends="" description="To make WAR file">
+		<delete dir="${build.web}/lib"/>
+		
+		<!--  <jar jarfile="${build.dir}/web/WEB-INF/lib/vco.jar" basedir="${build.dir}/web/WEB-INF/classes"/>  -->
+		<jar jarfile="${lib.dir}/make-earth-heavenly.jar" basedir="${build.dir}/web/WEB-INF/classes" 	excludes = "hibernate.cfg.xml "/>
+		
+		<jar jarfile="${build.dir}/app/make-earth-heavenly.war"  basedir="${build.dir}/web"
+					excludes = "**/com/**,**/Session/** ">
+		</jar>
+		
+	</target>				
+
+	<target name="tomcat_config" depends="prepare" description="to copy config/app/content.xml to tomcat/conf/">
+		<copy todir="${DEPLOY_CONFIG}">			
+			<fileset dir="${cfgApp}">
+				<include name="**/*.xml"/>
+			</fileset>
+			<mapper type="flatten"/>
+		</copy>
+	</target>
+	
+	<target name="app-descriptors" depends="tomcat_config" description="To copy descriptors required for the application">
+		<copy todir="${build.dir}/app/META-INF/">
+			<fileset dir="${cfgApp}">
+				<include name="**/*.xml"/>
+			</fileset>
+			<mapper type="flatten"/>
+		</copy>		
+	</target>
+	
+	<target name="delete-deployed-dir" depends="" description="">
+		<delete dir="${J2EE_HOME}/*}" />
+	</target>
+
+	<target name="deploy-dev" depends="clean,init-dev,log4j-prop-files-dev,web-classes,delete-deployed-dir,app-descriptors,web-war"  description="To build DEV EAR file (uses data-sources.xml.dev) and deploy to App. server">
+		<copy file="${dist.war.name}.war" todir="${DEPLOY_DIR}" overwrite="true"/>
+		<echo>${dist.war.name}.war file for DEV is built and deployed </echo>
+	</target>
+
+	<target name="VERIFY_JAVA_HOME"  depends="deploy-dev,delete-deployed-dir,delete" description="Verify that Java Home Environment Variable is set properly" >
+		<echo message="VERIFY: JAVA_HOME is set to = ${env.JAVA_HOME}"/>
+	</target>
+
+	<target name="delete" depends="deploy-dev">
+		<delete >
+			<fileset dir="${build.dir}">
+				<include id="**/*"/>
+			</fileset>
+		</delete>
+		<delete dir="${build.dir}"/>
+	</target>	
+</project>
